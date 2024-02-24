@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission-deployment
+  namespace: transmission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+      - name: transmission
+        image: lscr.io/linuxserver/transmission:lates
+        ports:
+        - containerPort: 9091
+          protocol: TCP
+          name: tcp9091
+        - containerPort: 51413
+          protocol: TCP
+          name: tcp51413
+        - containerPort: 51413
+          protocol: UDP
+          name: udp51413
+        volumeMounts:
+          - name: transmission-config
+            mountPath: /config
+          - name: transmission-downloads
+            mountPath: /downloads
+      volumes:
+      - name: transmission-downloads
+        hostPath:
+          path: /nfs-data/media/
+          type: Directory
+      - name: plex-config
+        hostPath:
+          path: /data/transmission
+          type: DirectoryOrCreate

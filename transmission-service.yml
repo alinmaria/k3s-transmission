@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: transmission-service
+  namespace: transmission
+spec:
+  selector:
+    app: transmission
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9091
+    name: tcp9091
+  - protocol: TCP
+    port: 51413
+    targetPort: 51413
+    name: tcp51413
+  - protocol: UDP
+    port: 51413
+    targetPort: 51413
+    name: udp51413
+  type: LoadBalancer
+  loadBalancerIP: 10.100.99.134
