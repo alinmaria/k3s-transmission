@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: transmission
-        image: lscr.io/linuxserver/transmission:lates
+        image: lscr.io/linuxserver/transmission:latest
         ports:
         - containerPort: 9091
           protocol: TCP
