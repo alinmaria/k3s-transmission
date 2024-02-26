@@ -43,5 +43,5 @@ spec:
           type: Directory
       - name: transmission-config
         hostPath:
-          path: /data/transmission
+          path: /nfs-ssd/transmission
           type: DirectoryOrCreate
